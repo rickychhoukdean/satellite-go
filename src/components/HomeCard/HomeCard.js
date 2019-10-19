@@ -46,16 +46,16 @@ export default function WelcomeCard() {
   let display = "";
   switch (view) {
     case find:
-      display = <FindCard getLocation={getLocation} />
+      display = (<FindCard getLocation={getLocation} title="Find what satellites are around you" />)
       break;
     case results:
-      display = <ControlledCarousel sats={satellites} />
+      display = <ControlledCarousel sats={satellites} title="Search Results" />
       break;
     case profile:
       display = <MessageCard text="this shows the profile" />
       break;
     case error:
-      display = <MessageCard text={errorMessage} />
+      display = <MessageCard text={errorMessage} title="Error!" />
       break;
     case searching:
       display = <MessageCard text="searching" loading={true} />
@@ -66,7 +66,7 @@ export default function WelcomeCard() {
   }
 
   const checkResults = () => {
-    (satellites.length) ? setView(results) : setView(profile);
+    (satellites.length) ? setView(results) : setView(find);
   }
 
   return (

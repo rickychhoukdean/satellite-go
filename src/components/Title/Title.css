@@ -1,0 +1,9 @@
+.logo-nav {
+  height: auto;
+  width: 10vw;
+}
+
+.title-container {
+  display: flex;
+  flex-direction: row;
+}
