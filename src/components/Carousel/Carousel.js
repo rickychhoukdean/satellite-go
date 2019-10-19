@@ -1,11 +1,12 @@
 import Carousel from 'react-bootstrap/Carousel';
 import React, { useState } from "react";
-import SatelliteCard from "./SatelliteCard";
+import SatelliteCard from "../SatelliteCard/SatelliteCard";
 import axios from 'axios';
+import Title from "../Title/Title"
 
 
 
-function ControlledCarousel({sats}) {
+function ControlledCarousel({sats , title}) {
   const [index, setIndex] = useState(0);
   const [direction, setDirection] = useState(null);
   const [respMsg, setResMsg] = useState('')
@@ -33,12 +34,16 @@ function ControlledCarousel({sats}) {
   } 
 
   return (
+    <div className="carousel-container">
+      <Title title={title} />
+    <div className="carousel-description"> There are {sats.length} satellites in the area! </div>
     <Carousel activeIndex={index} direction={direction} onSelect={handleSelect} interval={null}>
+      {console.log(sats)}
       {sats.map(sat => {
         return (
-          <Carousel.Item>
+          <Carousel.Item key={sat.satid}>
             <SatelliteCard 
-              key={sat.satid}
+              // key={sat.satid}
               sat={sat}
               image='https://waterfm.com/wp-content/uploads/satellite-in-space.jpg' 
               desc={"latitude: " + sat.satlat + "\nlongitude: " + sat.satlng + "\nlaunch date: " + sat.launchDate}
@@ -62,6 +67,7 @@ function ControlledCarousel({sats}) {
        
       </Carousel.Item>
     </Carousel>
+    </div>
   );
 }
 

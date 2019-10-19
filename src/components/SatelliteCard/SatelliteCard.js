@@ -3,7 +3,7 @@ import Tooltip from 'react-bootstrap/Tooltip'
 import Overlay from 'react-bootstrap/Overlay'
 
 
-import '../styles/Card.scss';
+import './SatelliteCard.scss';
 import Axios from 'axios';
 
 // API RESPONSE

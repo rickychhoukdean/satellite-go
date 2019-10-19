@@ -1,0 +1,28 @@
+.search-button {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 50vw;
+  height: 10vh;
+  background-color: lightskyblue;
+  font-size: 1em;
+}
+
+.collection-button {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 50vw;
+  height: 10vh;
+  background-color: lightgrey;
+  font-size: 1em;
+}
+#home-card {
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+#tab-buttons {
+}

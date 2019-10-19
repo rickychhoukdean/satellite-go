@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import Axios from 'axios';
 import { Row, Col, Container } from 'react-bootstrap'
-import "../styles/Card.scss"
-import "../styles/Profile.scss"
-import SatelliteCard from "./SatelliteCard"
+import "./SatelliteCard/SatelliteCard.scss"
+import "./SatelliteCard/Profile.scss"
+import SatelliteCard from "./SatelliteCard/SatelliteCard"
 
 
 const ProfileView = ({sats}) => {
