@@ -9,13 +9,21 @@ import SatelliteCard from "./SatelliteCard"
 const ProfileView = ({sats}) => {
   const [favourites, setFavourites] = useState([]);
 
+  useEffect(() => {
+    Axios.get('https://cors-anywhere.herokuapp.com/https://nasa-spaceapp-lhl.herokuapp.com/user/1/satellites')
+    .then(res => {
+      console.log("==|==|> res from get:",res)
+      setFavourites(res.data)
+    })
+  }, [])
 
   return (
     <div className="flexContainer">
-      {sats.map(sat => {
+      {favourites && favourites.map(sat => {
+        sat.satname = sat.name
         return (
             <SatelliteCard 
-              key={sat.satid}
+              key={sat.id}
               sat={sat}
               image='https://waterfm.com/wp-content/uploads/satellite-in-space.jpg' 
               desc={`Id: ${sat.satid}\nlatitude: ${sat.satlat}\nlongitude: ${sat.satlng}\nlaunch date: ${sat.launchDate}`}

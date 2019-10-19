@@ -3,5 +3,11 @@
   flex-direction: row;
   flex-wrap: wrap;
   width: 90%;
-  height: 90%;
+  overflow: hidden;
+  overflow-y: scroll;
+  scrollbar-width: 0px;
+  margin: auto;
+}
+::-webkit-scrollbar {
+  display: none
 }

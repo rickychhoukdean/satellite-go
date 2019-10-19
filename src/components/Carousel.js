@@ -16,15 +16,19 @@ function ControlledCarousel({sats}) {
   };
   
   const addToFavourites = (sat, desc) => {
-    console.log("==|==|> adding",sat.satname,"to favourites!")
-    axios.post('http://localhost:8000/user/1/satellites', {
+    console.log("==|==|> adding",sat.satid,"to favourites!")
+
+    axios.post('https://cors-anywhere.herokuapp.com/https://nasa-spaceapp-lhl.herokuapp.com/user/1/satellites?name='+sat.satname+'&year_launched='+sat.launchDate+'&sat_id='+sat.satid+'&description='+desc, {
+      params: {
         sat_id: sat.satid,
         name: sat.satname,
         description: desc,
-        launch_year: sat.launchDate
+        year_launched: sat.launchDate
+      }
     })
     .then(res => {
-      setResMsg(res.message)
+      console.log(res)
+      setResMsg(res)
     })
   } 
 
@@ -37,7 +41,7 @@ function ControlledCarousel({sats}) {
               key={sat.satid}
               sat={sat}
               image='https://waterfm.com/wp-content/uploads/satellite-in-space.jpg' 
-              desc={`Id: ${sat.satid}\nlatitude: ${sat.satlat}\nlongitude: ${sat.satlng}\nlaunch date: ${sat.launchDate}`}
+              desc={"latitude: " + sat.satlat + "\nlongitude: " + sat.satlng + "\nlaunch date: " + sat.launchDate}
               addToFavourites={addToFavourites}
               card_style="carousel"
             />

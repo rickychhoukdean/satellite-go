@@ -44,28 +44,39 @@ function SatelliteCard({sat, image, desc, addToFavourites, card_style }) {
     const target = useRef(null);
 
     return (
-        <div className={card_style === "carousel" ? "card_back" : "card_collection"}>
+        <div className={card_style === "carousel" ? "card_back" : "card_collection"} style={{ borderColor: sat.bordColor }} >
             
             <div className='title'>
-                <h4 className='sat_name' style={{ margin: 0 }}>{sat.satname}</h4>
+                <h5 className='sat_name' style={{ margin: 0 }}>{sat.satname}</h5>
                 {card_style === "carousel" && 
                 <div style={{ display: 'flex', flexDirection: 'row' }}>
-                    <h6 style={{ margin: 0 }}>hp</h6>
-                    {/* <h5 style={{ margin: 0 }}>{sat.satalt}</h5> */}
+                    <span style={{ margin: 0 }}>alt </span>
+                    <span style={{ margin: 0, fontSize: '1.2rem' }}>{parseInt(sat.satalt)}</span>
                 </div>
                 }
             </div>
             <img src={image} className='image' />
             {card_style === "carousel" && 
-            <p className='text'>
-                {desc}
-            </p>
+            <div>
+                <p className='text'>
+                    latitude: {sat.satlat}
+                </p>
+                <p className='text'>
+                    longitude: {sat.satlng}
+                </p>
+                <p className='text'>
+                    launch date: {sat.launchDate}
+                </p>
+                <p className='text'>
+                    {desc}
+                </p>
+            </div>
             }
 
             {card_style === 'carousel' &&
             <div>
-            <button ref={target} style={{ borderRadius:100, backgroundColor: '#939393', width: 50, height: 50, position: 'absolute', bottom: 45, right: 20 }} onClick={e => {
-                // addToFavourites(sat, desc)
+            <button ref={target} style={{ borderRadius:100, backgroundColor: '#939393', width: 45, height: 45, position: 'absolute', bottom: 45, right: 20, borderWidth: 0 }} onClick={e => {
+                addToFavourites(sat, desc)
                 console.log('clicked')
                 setShow(!show)
                 
