@@ -1,9 +1,11 @@
 import React, { useState , useEffect } from "react";
 import logo from "./logo.svg";
+import 'bootstrap/dist/css/bootstrap.min.css';
 import "./App.css";
 import Axios from "axios";
 import WelcomeCard from "./components/WelcomeCard/WelcomeCard";
 import HomeCard from "./components/HomeCard/HomeCard"
+
 
 function App() {
   const [view, setView] = useState("loading")

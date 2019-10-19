@@ -2,7 +2,9 @@ import "./HomeCard.css"
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import FindCard from "../FindCard/FindCard";
-import ErrorCard from"../ErrorCard/ErrorCard";
+import ErrorCard from "../ErrorCard/ErrorCard";
+import ControlledCarousel from "../Carousel/Carousel"
+
 
 export default function WelcomeCard() {
 
@@ -14,7 +16,7 @@ export default function WelcomeCard() {
   // const [latlong, setlatlong] = useState({ lat: null, long: null });
   const [satellites, setSatellites] = useState([])
   const [view, setView] = useState("find");
-  let  errorMessage =""
+  let errorMessage = ""
 
   const getLocation = function () {
     navigator.geolocation.getCurrentPosition(showPosition => {
@@ -44,10 +46,10 @@ export default function WelcomeCard() {
       display = <FindCard getLocation={getLocation} />
       break;
     case results:
-      display = <ErrorCard text="this shows the cards" />
+      display = <ControlledCarousel sats={satellites} />
       break;
     case profile:
-    display = <ErrorCard text="this shows the profile" />
+      display = <ErrorCard text="this shows the profile" />
       break;
     case error:
       display = <ErrorCard text={errorMessage} />
@@ -66,8 +68,8 @@ export default function WelcomeCard() {
         {/* Buttons for tab "navigation" */}
       </div>
       <div id="tab-buttons">
-        <button className="search-button" onClick={()=>{setView(find)}}>Search</button>
-        <button className="collection-button" onClick={()=>{setView(profile)}}>Collection</button>
+        <button className="search-button" onClick={() => { setView(find) }}>Search</button>
+        <button className="collection-button" onClick={() => { setView(profile) }}>Collection</button>
       </div>
     </>
   )
