@@ -5,10 +5,17 @@ import "./App.css";
 import Axios from "axios";
 import WelcomeCard from "./components/WelcomeCard/WelcomeCard";
 import HomeCard from "./components/HomeCard/HomeCard"
+import useSatelliteInfo from './hooks/useSatelliteInfo';
+
 
 
 function App() {
-  const [view, setView] = useState("loading")
+	const [view, setView] = useState("loading")
+	
+	const {
+		satInfo,
+		getWikiAllSatInfo
+	} = useSatelliteInfo();
 
   let display="";
 
@@ -30,7 +37,8 @@ else {
 
 return (
   <div className="App">
-  {display}
+	<button onClick={() => getWikiAllSatInfo(["2", "28", "30", "7", "20"])}>TEST ALL COMBINED</button>	
+	{display}
   </div>
 )
 
