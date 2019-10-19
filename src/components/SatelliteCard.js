@@ -1,5 +1,8 @@
 import React from 'react'
 
+
+import '../styles/Card.scss';
+
 // API RESPONSE
 // "above": [
 //     {
@@ -31,12 +34,23 @@ import React from 'react'
 //     }
 //   ]
 
-function SatelliteCard({satName, launchDate, image}) {
+function SatelliteCard({satName, launchDate, image, altitude, desc}) {
     return (
-        <div className="sat-card">
-<div className="sat-image">{image}</div>
-<div className="sat-info">{satName}</div>
-<div className="sat-info">{launchDate}</div>
+        <div className="sat-card card_back">
+            {/* <div className="sat-image">{image}</div>
+            <div className="sat-info">{satName}</div>
+            <div className="sat-info">{launchDate}</div> */}
+            <div className='title'>
+                <h4 className='sat_name' style={{ margin: 0 }}>{satName}</h4>
+                <div style={{ display: 'flex', flexDirection: 'row' }}>
+                    <h6 style={{ margin: 0 }}>hp</h6>
+                    <h5 style={{ margin: 0 }}>{altitude}</h5>
+                </div>
+            </div>
+            <img src={image} className='image' />
+            <p className='text'>
+                {desc}
+            </p>
         </div>
     )
 }
