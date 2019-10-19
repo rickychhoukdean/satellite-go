@@ -2,7 +2,7 @@ import "./HomeCard.css"
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import FindCard from "../FindCard/FindCard";
-import ErrorCard from "../ErrorCard/ErrorCard";
+import MessageCard from "../MessageCard/MessageCard";
 import ControlledCarousel from "../Carousel/Carousel"
 
 
@@ -12,6 +12,7 @@ export default function WelcomeCard() {
   const results = "results";
   const profile = "profile";
   const error = "error";
+  const searching = "searching"
 
   // const [latlong, setlatlong] = useState({ lat: null, long: null });
   const [satellites, setSatellites] = useState([])
@@ -19,6 +20,8 @@ export default function WelcomeCard() {
   let errorMessage = ""
 
   const getLocation = function () {
+    //  view change to loading
+    setView(searching);
     navigator.geolocation.getCurrentPosition(showPosition => {
 
       const lat = showPosition.coords.latitude;
@@ -49,14 +52,21 @@ export default function WelcomeCard() {
       display = <ControlledCarousel sats={satellites} />
       break;
     case profile:
-      display = <ErrorCard text="this shows the profile" />
+      display = <MessageCard text="this shows the profile" />
       break;
     case error:
-      display = <ErrorCard text={errorMessage} />
+      display = <MessageCard text={errorMessage} />
+      break;
+    case searching:
+      display = <MessageCard text="searching" loading={true} />
       break;
 
     default:
       break;
+  }
+
+  const checkResults = () => {
+    (satellites.length) ? setView(results) : setView(profile);
   }
 
   return (
@@ -68,8 +78,8 @@ export default function WelcomeCard() {
         {/* Buttons for tab "navigation" */}
       </div>
       <div id="tab-buttons">
-        <button className="search-button" onClick={() => { setView(find) }}>Search</button>
-        <button className="collection-button" onClick={() => { setView(profile) }}>Collection</button>
+        <button className="search-button" onClick={checkResults}>Search</button>
+        <button className="collection-button" onClick={() => { setView(profile)}}>Collection</button>
       </div>
     </>
   )
