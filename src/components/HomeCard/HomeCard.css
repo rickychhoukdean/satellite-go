@@ -1,0 +1,17 @@
+.search-button{
+  position:fixed;
+  bottom:0;
+  left:0;
+width:50vw;
+}
+
+.collection-button{
+  position:fixed;
+  bottom:0;
+  right:0;
+width:50vw;
+}
+
+.find-button {
+  
+}

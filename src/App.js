@@ -1,44 +1,38 @@
-import React, { useState } from "react";
+import React, { useState , useEffect } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import Axios from "axios";
+import WelcomeCard from "./components/WelcomeCard/WelcomeCard";
+import HomeCard from "./components/HomeCard/HomeCard"
 
 function App() {
-  const [latlong, setlatlong] = useState({ lat: null, long: null });
+  const [view, setView] = useState("loading")
 
-  //This is how you get current lat / long
-  const getLocation = function() {
-    navigator.geolocation.getCurrentPosition(showPosition => {
-      setlatlong({
-        ...latlong,
-        lat: showPosition.coords.latitude,
-        long: showPosition.coords.longitude
-      });
-      console.log(showPosition.coords.latitude);
-      console.log(showPosition.coords.longitude);
-    });
-  };
+  let display="";
 
-  const getImage = function() {
-  };
+  useEffect(()=>{
+    setView("loading")
+    setTimeout(()=>{setView("home")},1000)
 
-  const getSatellites = function() {
-    Axios.get(
-      `https://www.n2yo.com/rest/v1/satellite/above/${latlong.lat}/${latlong.long}/0/70/18/&apiKey=UAEV2J-66KU43-VZWHN7-47UW
-      `
-    ).then(res => {
-      console.log(res);
-      // res.data.above.map(data => {});
-    });
-  };
+  }, [])
 
-  return (
-    <div className="App">
-      <div onClick={() => getLocation()}>Log location</div>
-      <div onClick={() => getSatellites()}>Log satellites</div>
-      <div onClick={getImage}>test2</div>
-    </div>
-  );
+if(view==="loading"){
+  display =  <WelcomeCard/>
+}
+
+else {
+  
+  display = <HomeCard/>
+}
+
+
+return (
+  <div className="App">
+  {display}
+  </div>
+)
+
+  
 }
 
 export default App;

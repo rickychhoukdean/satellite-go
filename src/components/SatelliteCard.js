@@ -31,12 +31,12 @@ import React from 'react'
 //     }
 //   ]
 
-function SatelliteCard({satName, launchDate, image}) {
+function SatelliteCard({ satName, launchDate, image }) {
     return (
         <div className="sat-card">
-<div className="sat-image">{image}</div>
-<div className="sat-info">{satName}</div>
-<div className="sat-info">{launchDate}</div>
+            <div className="sat-image">{image}</div>
+            <div className="sat-info">{satName}</div>
+            <div className="sat-info">{launchDate}</div>
         </div>
     )
 }
