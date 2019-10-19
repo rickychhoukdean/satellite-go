@@ -1,7 +1,6 @@
 import Carousel from 'react-bootstrap/Carousel';
 import React, { useState } from "react";
 import SatelliteCard from "./SatelliteCard";
-import CarouselItem from 'react-bootstrap/CarouselItem';
 import axios from 'axios';
 
 
@@ -40,6 +39,7 @@ function ControlledCarousel({sats}) {
               image='https://waterfm.com/wp-content/uploads/satellite-in-space.jpg' 
               desc={`Id: ${sat.satid}\nlatitude: ${sat.satlat}\nlongitude: ${sat.satlng}\nlaunch date: ${sat.launchDate}`}
               addToFavourites={addToFavourites}
+              card_style="carousel"
             />
             
           </Carousel.Item>

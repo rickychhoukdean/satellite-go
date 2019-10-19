@@ -39,25 +39,31 @@ import Axios from 'axios';
 
 
 
-function SatelliteCard({sat, image, desc, addToFavourites }) {
+function SatelliteCard({sat, image, desc, addToFavourites, card_style }) {
     const [show, setShow] = useState(false);
     const target = useRef(null);
 
     return (
-        <div className="sat-card card_back">
+        <div className={card_style === "carousel" ? "card_back" : "card_collection"}>
             
             <div className='title'>
                 <h4 className='sat_name' style={{ margin: 0 }}>{sat.satname}</h4>
+                {card_style === "carousel" && 
                 <div style={{ display: 'flex', flexDirection: 'row' }}>
                     <h6 style={{ margin: 0 }}>hp</h6>
                     {/* <h5 style={{ margin: 0 }}>{sat.satalt}</h5> */}
                 </div>
+                }
             </div>
             <img src={image} className='image' />
+            {card_style === "carousel" && 
             <p className='text'>
                 {desc}
             </p>
+            }
 
+            {card_style === 'carousel' &&
+            <div>
             <button ref={target} style={{ borderRadius:100, backgroundColor: '#939393', width: 50, height: 50, position: 'absolute', bottom: 45, right: 20 }} onClick={e => {
                 // addToFavourites(sat, desc)
                 console.log('clicked')
@@ -70,7 +76,9 @@ function SatelliteCard({sat, image, desc, addToFavourites }) {
             Added to collection.
           </Tooltip>
         )}
-      </Overlay>   
+      </Overlay>  
+      </div>
+            } 
         </div>
     )
 }

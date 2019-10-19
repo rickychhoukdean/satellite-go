@@ -6,6 +6,8 @@ import Axios from "axios";
 import ControlledCarousel from "./components/Carousel"
 import './styles/Card.scss'
 
+import ProfileView from './components/ProfileView';
+
 function App() {
   const [latlong, setlatlong] = useState({ lat: null, long: null });
   const [sats, setSats] = useState([])
@@ -28,7 +30,7 @@ function App() {
 
   const getSatellites = function() {
     Axios.get(
-      `https://www.n2yo.com/rest/v1/satellite/above/${latlong.lat}/${latlong.long}/0/70/18/&apiKey=UAEV2J-66KU43-VZWHN7-47UW
+      `https://www.n2yo.com/rest/v1/satellite/above/${latlong.lat}/${latlong.long}/0/70/18/&apiKey=ZX8QFR-KLNRJE-E2TUHW-47VJ
       `
     ).then(res => {
       // console.log(res);
@@ -44,21 +46,8 @@ function App() {
 
   return (
     <div className="App">
-      {/* <div onClick={() => getLocation()}>Log location</div>
-      <div onClick={() => getSatellites()}>Log satellites</div>
-      <div onClick={getImage}>test2</div> */}
-      <ControlledCarousel sats={sats} />
-      {/* {sats.map(sat => {
-        return (
-          <SatelliteCard 
-            key={sat.satid}
-            satName={sat.satname} 
-            launchDate='' altitude={sat.satalt}
-            image='https://waterfm.com/wp-content/uploads/satellite-in-space.jpg' 
-            desc={`Id: ${sat.satid}\nlatitude: ${sat.satlat}\nlongitude: ${sat.satlng}\nlaunch date: ${sat.launchDate}`}
-          />
-        )
-      })} */}
+      {/* <ControlledCarousel sats={sats} /> */}
+      <ProfileView sats={sats} />
 
       
     </div>

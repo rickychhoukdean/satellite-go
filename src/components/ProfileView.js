@@ -1,21 +1,30 @@
 import React, { useEffect, useState } from 'react';
 import Axios from 'axios';
+import { Row, Col, Container } from 'react-bootstrap'
+import "../styles/Card.scss"
+import "../styles/Profile.scss"
+import SatelliteCard from "./SatelliteCard"
 
 
-const ProfileView = () => {
+const ProfileView = ({sats}) => {
   const [favourites, setFavourites] = useState([]);
 
-  useEffect(() => {
-    Axios.get('http://localhost:8000/user/1/satellites')
-    .then(favs => {
-      setFavourites(favs)
-    })
-  })
 
   return (
-    <div>
-      
+    <div className="flexContainer">
+      {sats.map(sat => {
+        return (
+            <SatelliteCard 
+              key={sat.satid}
+              sat={sat}
+              image='https://waterfm.com/wp-content/uploads/satellite-in-space.jpg' 
+              desc={`Id: ${sat.satid}\nlatitude: ${sat.satlat}\nlongitude: ${sat.satlng}\nlaunch date: ${sat.launchDate}`}
+              card_style="collection"
+            />
+        )
+      })}
     </div>
+    
   )
 }
 
