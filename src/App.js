@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import logo from "./logo.svg";
+import 'bootstrap/dist/css/bootstrap.min.css';
 import "./App.css";
 import Axios from "axios";
-
-import SatelliteCard from './components/SatelliteCard'
+import ControlledCarousel from "./components/Carousel"
 import './styles/Card.scss'
 
 function App() {
@@ -44,11 +44,11 @@ function App() {
 
   return (
     <div className="App">
-      <div onClick={() => getLocation()}>Log location</div>
+      {/* <div onClick={() => getLocation()}>Log location</div>
       <div onClick={() => getSatellites()}>Log satellites</div>
-      <div onClick={getImage}>test2</div>
-
-      {sats.map(sat => {
+      <div onClick={getImage}>test2</div> */}
+      <ControlledCarousel sats={sats} />
+      {/* {sats.map(sat => {
         return (
           <SatelliteCard 
             key={sat.satid}
@@ -58,14 +58,9 @@ function App() {
             desc={`Id: ${sat.satid}\nlatitude: ${sat.satlat}\nlongitude: ${sat.satlng}\nlaunch date: ${sat.launchDate}`}
           />
         )
-      })}
+      })} */}
 
-      <SatelliteCard 
-        satName='5u93R-Probe' 
-        launchDate='' altitude='500' 
-        image='https://waterfm.com/wp-content/uploads/satellite-in-space.jpg' 
-        desc="In the context of spaceflight, a satellite is an object that has been intentionally placed into orbit. These objects are called artificial satellites to distinguish them from natural satellites such as Earth's Moon." 
-      />
+      
     </div>
   );
 }
