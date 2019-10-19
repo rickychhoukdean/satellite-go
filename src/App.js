@@ -34,8 +34,8 @@ function App() {
 
   return (
     <div className="App">
-      <div onClick={getLocation}>CLICK</div>
-      <div onClick={getSatellites}>test</div>
+      <div onClick={() => getLocation()}>Log location</div>
+      <div onClick={() => getSatellites()}>Log satellites</div>
       <div onClick={getImage}>test2</div>
     </div>
   );
