@@ -35,7 +35,7 @@ function ControlledCarousel({sats , title}) {
 
   return (
     <div className="carousel-container">
-      <Title title={title} />
+      {/* <Title title={title} /> */}
     <div className="carousel-description"> There are {sats.length} satellites in the area! </div>
     <Carousel activeIndex={index} direction={direction} onSelect={handleSelect} interval={null}>
       {console.log(sats)}
@@ -54,18 +54,6 @@ function ControlledCarousel({sats , title}) {
           </Carousel.Item>
         )
       })}
-      <Carousel.Item>
-      <SatelliteCard 
-        sat={{
-          satname:'5u93R-Probe',
-          satalt:'500'
-        }}
-        launchDate=''  
-        image='https://waterfm.com/wp-content/uploads/satellite-in-space.jpg' 
-        desc="In the context of spaceflight, a satellite is an object that has been intentionally placed into orbit. These objects are called artificial satellites to distinguish them from natural satellites such as Earth's Moon." 
-      />
-       
-      </Carousel.Item>
     </Carousel>
     </div>
   );

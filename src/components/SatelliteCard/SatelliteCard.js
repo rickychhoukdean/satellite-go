@@ -68,7 +68,7 @@ function SatelliteCard({sat, image, desc, addToFavourites, card_style }) {
                     launch date: {sat.launchDate}
                 </p>
                 <p className='text'>
-                    {desc}
+                    {sat.description}
                 </p>
             </div>
             }
