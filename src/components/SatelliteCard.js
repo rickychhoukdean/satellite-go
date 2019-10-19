@@ -1,7 +1,10 @@
-import React from 'react'
+import React, {useState, useRef} from 'react'
+import Tooltip from 'react-bootstrap/Tooltip'
+import Overlay from 'react-bootstrap/Overlay'
 
 
 import '../styles/Card.scss';
+import Axios from 'axios';
 
 // API RESPONSE
 // "above": [
@@ -34,23 +37,40 @@ import '../styles/Card.scss';
 //     }
 //   ]
 
-function SatelliteCard({satName, launchDate, image, altitude, desc}) {
+
+
+function SatelliteCard({sat, image, desc, addToFavourites }) {
+    const [show, setShow] = useState(false);
+    const target = useRef(null);
+
     return (
         <div className="sat-card card_back">
-            {/* <div className="sat-image">{image}</div>
-            <div className="sat-info">{satName}</div>
-            <div className="sat-info">{launchDate}</div> */}
+            
             <div className='title'>
-                <h4 className='sat_name' style={{ margin: 0 }}>{satName}</h4>
+                <h4 className='sat_name' style={{ margin: 0 }}>{sat.satname}</h4>
                 <div style={{ display: 'flex', flexDirection: 'row' }}>
                     <h6 style={{ margin: 0 }}>hp</h6>
-                    <h5 style={{ margin: 0 }}>{altitude}</h5>
+                    {/* <h5 style={{ margin: 0 }}>{sat.satalt}</h5> */}
                 </div>
             </div>
             <img src={image} className='image' />
             <p className='text'>
                 {desc}
             </p>
+
+            <button ref={target} style={{ borderRadius:100, backgroundColor: '#939393', width: 50, height: 50, position: 'absolute', bottom: 45, right: 20 }} onClick={e => {
+                // addToFavourites(sat, desc)
+                console.log('clicked')
+                setShow(!show)
+                
+            }}>+</button>
+             <Overlay target={target.current} show={show} placement="left">
+        {props => (
+          <Tooltip id="overlay-example" {...props}>
+            Added to collection.
+          </Tooltip>
+        )}
+      </Overlay>   
         </div>
     )
 }
