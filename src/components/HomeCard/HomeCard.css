@@ -3,6 +3,10 @@
   bottom:0;
   left:0;
 width:50vw;
+height: 10vh;
+background-color: lightskyblue;
+font-size: 1em;
+
 }
 
 .collection-button{
@@ -10,8 +14,16 @@ width:50vw;
   bottom:0;
   right:0;
 width:50vw;
-}
+height: 10vh;
+background-color: lightgrey;
+font-size: 1em;
 
-.find-button {
-  
+}
+#home-card{
+  height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#tab-buttons {
 }
