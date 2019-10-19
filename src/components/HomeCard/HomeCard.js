@@ -4,6 +4,7 @@ import Axios from "axios";
 import FindCard from "../FindCard/FindCard";
 import MessageCard from "../MessageCard/MessageCard";
 import ControlledCarousel from "../Carousel/Carousel"
+import useSatelliteInfo from '../../hooks/useSatelliteInfo';
 
 
 export default function WelcomeCard() {
@@ -18,38 +19,55 @@ export default function WelcomeCard() {
   const [satellites, setSatellites] = useState([])
   const [view, setView] = useState("find");
   let errorMessage = ""
+	const {
+		satInfo,
+		getWikiAllSatInfo
+	} = useSatelliteInfo();
 
-  const getLocation = function () {
-    //  view change to loading
+  // const getLocation = function () {
+  //   //  view change to loading
+  //   setView(searching);
+  //   navigator.geolocation.getCurrentPosition(showPosition => {
+
+  //     const lat = showPosition.coords.latitude;
+  //     const long = showPosition.coords.longitude;
+  //     Axios.get(
+  //       `https://www.n2yo.com/rest/v1/satellite/above/${lat}/${long}/0/70/18/&apiKey=UAEV2J-66KU43-VZWHN7-47UW
+  //       `
+  //     ).then(res => {
+  //       if (res.data.above.length === 0) {
+  //         errorMessage = "There are no satellites in your location!";
+  //         setView(error)
+  //       }
+  //       else {
+  //         console.log(res.data.above)
+  //         setSatellites(res.data.above)
+  //         setView(results)
+  //       }
+  //     });
+  //   });
+  // };
+
+  // <button onClick={() => getWikiAllSatInfo(["2", "28", "30", "7", "20"])}>TEST ALL COMBINED</button>	
+
+
+  const setSearching = function(){
     setView(searching);
-    navigator.geolocation.getCurrentPosition(showPosition => {
+  }
 
-      const lat = showPosition.coords.latitude;
-      const long = showPosition.coords.longitude;
-      Axios.get(
-        `https://www.n2yo.com/rest/v1/satellite/above/${lat}/${long}/0/70/18/&apiKey=UAEV2J-66KU43-VZWHN7-47UW
-        `
-      ).then(res => {
-        if (res.data.above.length === 0) {
-          errorMessage = "There are no satellites in your location!";
-          setView(error)
-        }
-        else {
-          console.log(res.data.above)
-          setSatellites(res.data.above)
-          setView(results)
-        }
-      });
-    });
-  };
+  const setResult = function(){
+    setView(results)
+  }
 
   let display = "";
   switch (view) {
     case find:
-      display = (<FindCard getLocation={getLocation} title="Find what satellites are around you" />)
+      display = (<FindCard getLocation={()=>(getWikiAllSatInfo(["2", "28", "30", "7", "20"] , setSearching , setResult))} title="Find what satellites are around you" />)
+      // display = (<FindCard getLocation={()=>(searchSatellites)} title="Find what satellites are around you" />)
+
       break;
     case results:
-      display = <ControlledCarousel sats={satellites} title="Search Results" />
+      display = <ControlledCarousel sats={satInfo} title="Search Results" />
       break;
     case profile:
       display = <MessageCard text="this shows the profile" />

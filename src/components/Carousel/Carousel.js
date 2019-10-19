@@ -34,6 +34,7 @@ function ControlledCarousel({sats , title}) {
       <Title title={title} />
     <div className="carousel-description"> There are {sats.length} satellites in the area! </div>
     <Carousel activeIndex={index} direction={direction} onSelect={handleSelect} interval={null}>
+      {console.log(sats)}
       {sats.map(sat => {
         return (
           <Carousel.Item key={sat.satid}>
