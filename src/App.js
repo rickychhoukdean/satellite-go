@@ -87,7 +87,6 @@ else {
 
 return (
   <div className="App">
-	{/* <button onClick={() => getWikiAllSatInfo(["2", "28", "30", "7", "20"])}>TEST ALL COMBINED</button>	 */}
 	{display}
   </div>
 )

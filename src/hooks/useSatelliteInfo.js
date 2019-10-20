@@ -1,5 +1,5 @@
-import { useState } from "react";
-import Axios from "axios";
+import { useState } from 'react';
+import Axios from 'axios';
 
 const useSatelliteInfo = () => {
   const [satInfo, setSatInfo] = useState([]);
@@ -15,23 +15,23 @@ const useSatelliteInfo = () => {
 
   //intDesignator is one of the parameters in the satellite api call.
   const getWikiSearch = function(satName, intDesignator) {
-    let url = "https://en.wikipedia.org/w/api.php";
+    let url = 'https://en.wikipedia.org/w/api.php';
 
     const params = {
-      action: "query",
-      list: "search",
+      action: 'query',
+      list: 'search',
       srsearch: `${satName} ${intDesignator}`,
-      format: "json"
+      format: 'json'
     };
 
-    url = url + "?origin=*";
+    url = url + '?origin=*';
     Object.keys(params).forEach(function(key) {
-      url += "&" + key + "=" + params[key];
+      url += '&' + key + '=' + params[key];
     });
 
     return Axios.get(url)
       .then(function(response) {
-        const checkTitle = satName.split(" ");
+        const checkTitle = satName.split(' ');
         if (
           response.data.query.search[0] &&
           response.data.query.search[0].title.includes(checkTitle[0])
@@ -39,7 +39,7 @@ const useSatelliteInfo = () => {
           const title = response.data.query.search[0].title;
           return title;
         } else {
-          return "";
+          return '';
         }
       })
       .catch(function(error) {
@@ -48,7 +48,7 @@ const useSatelliteInfo = () => {
   };
 
   const getWikiSatDesc = wikiTitle => {
-    const temp = wikiTitle.replace(/ /g, "%20");
+    const temp = wikiTitle.replace(/ /g, '%20');
     const url = `https://en.wikipedia.org/w/api.php?origin=*&format=json&action=query&prop=extracts&exintro&explaintext&titles=${temp}`;
 
     return Axios.get(url)
@@ -65,7 +65,7 @@ const useSatelliteInfo = () => {
   };
 
   const getWikiSatImg = wikiTitle => {
-    const temp = wikiTitle.replace(/ /g, "%20");
+    const temp = wikiTitle.replace(/ /g, '%20');
     const url = `https://en.wikipedia.org/w/api.php?origin=*&format=json&action=query&prop=pageimages&extract&exintro&explaintext&titles=${temp}&pithumbsize=400`;
 
     return Axios.get(url)
@@ -75,7 +75,7 @@ const useSatelliteInfo = () => {
         ].thumbnail
           ? response.data.query.pages[Object.keys(response.data.query.pages)[0]]
               .thumbnail.source
-          : "dummy data";
+          : 'dummy data';
 
         return imageUrl;
       })
@@ -84,29 +84,35 @@ const useSatelliteInfo = () => {
       });
   };
 
-  const getWikiSatInfo = (satName, intDesignator) => {
-    return getWikiSearch(satName, intDesignator).then(title => {
-      if (title) {
-        Promise.all([getWikiSatDesc(title), getWikiSatImg(title)]).then(
-          values => {
-            // console.log(intDesignator)
+  const getWikiSatInfo = satellite => {
+    return getWikiSearch(satellite.satname, satellite.intDesignator).then(
+      title => {
+        if (title) {
+          Promise.all([getWikiSatDesc(title), getWikiSatImg(title)]).then(
+            values => {
+              // console.log(intDesignator)
 
-
-
-            setSatInfo(prev => {
-              return [
-                ...prev,
-                {
-                  name: satName,
-                  description: values[0],
-                  imageUrl: values[1]
-                }
-              ];
-            });
-          }
-        );
+              setSatInfo(prev => {
+                return [
+                  ...prev,
+                  {
+                    satname: satellite.satname,
+                    description: values[0],
+                    imageUrl: values[1],
+                    satIntDesignator: satellite.intDesignator,
+                    satid: satellite.satid,
+                    satlat: satellite.satlat,
+                    satlng: satellite.satlng,
+                    satalt: satellite.satalt,
+                    launchDate: satellite.launchDate
+                  }
+                ];
+              });
+            }
+          );
+        }
       }
-    });
+    );
   };
 
   const getWikiAllSatInfo = (categoryIds, setSearching, setResult) => {
@@ -120,20 +126,20 @@ const useSatelliteInfo = () => {
       });
     }).then(coords => {
       Promise.all([
-        getSatellites(coords.lat, coords.long, "2"),
-        getSatellites(coords.lat, coords.long, "28"),
-        getSatellites(coords.lat, coords.long, "30"),
-        getSatellites(coords.lat, coords.long, "7"),
-        getSatellites(coords.lat, coords.long, "20")
+        getSatellites(coords.lat, coords.long, '2'),
+        getSatellites(coords.lat, coords.long, '28'),
+        getSatellites(coords.lat, coords.long, '30'),
+        getSatellites(coords.lat, coords.long, '7'),
+        getSatellites(coords.lat, coords.long, '20')
       ]).then(async satellites => {
         const flatSatellites = satellites.flat();
-        console.log("satellites found", flatSatellites);
-        const test = await flatSatellites.map(async satellite => {
+        console.log('satellites found', flatSatellites);
+        await flatSatellites.map(async satellite => {
           if (satellite) {
-            await getWikiSatInfo(satellite.satname, satellite.intDesignator);
+            await getWikiSatInfo(satellite);
           }
         });
-        setResult()
+        setResult();
       });
     });
   };
