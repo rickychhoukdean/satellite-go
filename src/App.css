@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Share+Tech+Mono');
+
 .App {
   display: flex;
   flex-direction: column;
@@ -26,6 +28,7 @@
 }
 
 body {
+  font-family: 'Share Tech Mono', monospace;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;

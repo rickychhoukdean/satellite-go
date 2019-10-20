@@ -36,17 +36,14 @@ function ControlledCarousel({sats , title}) {
   return (
     <div className="carousel-container">
       {/* <Title title={title} /> */}
-    <div className="carousel-description"> There are {sats.length} satellites in the area! </div>
+    <div className="carousel-description" style={{ marginBottom: 20 }}> There are <h5 style={{ margin: 3 }}>{sats.length}</h5> satellites in the area! </div>
     <Carousel activeIndex={index} direction={direction} onSelect={handleSelect} interval={null}>
       {console.log(sats)}
       {sats.map(sat => {
         return (
           <Carousel.Item key={sat.satid}>
             <SatelliteCard 
-              // key={sat.satid}
               sat={sat}
-              image='https://waterfm.com/wp-content/uploads/satellite-in-space.jpg' 
-              desc={"latitude: " + sat.satlat + "\nlongitude: " + sat.satlng + "\nlaunch date: " + sat.launchDate}
               addToFavourites={addToFavourites}
               card_style="carousel"
             />

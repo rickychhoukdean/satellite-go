@@ -5,6 +5,7 @@ import FindCard from "../FindCard/FindCard";
 import MessageCard from "../MessageCard/MessageCard";
 import ControlledCarousel from "../Carousel/Carousel"
 import useSatelliteInfo from '../../hooks/useSatelliteInfo';
+import ProfileView from '../ProfileView';
 
 
 export default function WelcomeCard() {
@@ -70,7 +71,7 @@ export default function WelcomeCard() {
       display = <ControlledCarousel sats={satInfo} title="Search Results" />
       break;
     case profile:
-      display = <MessageCard text="this shows the profile" />
+      display = <ProfileView />
       break;
     case error:
       display = <MessageCard text={errorMessage} title="Error!" />

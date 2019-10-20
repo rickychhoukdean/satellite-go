@@ -6,7 +6,7 @@ import "./SatelliteCard/Profile.scss"
 import SatelliteCard from "./SatelliteCard/SatelliteCard"
 
 
-const ProfileView = ({sats}) => {
+const ProfileView = () => {
   const [favourites, setFavourites] = useState([]);
 
   useEffect(() => {
@@ -25,7 +25,9 @@ const ProfileView = ({sats}) => {
             <SatelliteCard 
               key={sat.id}
               sat={sat}
-              image='https://waterfm.com/wp-content/uploads/satellite-in-space.jpg' 
+              image={sat.imageUrl === "dummy data" 
+                ? 'https://waterfm.com/wp-content/uploads/satellite-in-space.jpg' 
+                : sat.imageUrl } 
               desc={`Id: ${sat.satid}\nlatitude: ${sat.satlat}\nlongitude: ${sat.satlng}\nlaunch date: ${sat.launchDate}`}
               card_style="collection"
             />

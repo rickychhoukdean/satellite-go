@@ -1,6 +1,8 @@
 .find-button {
   padding: 5vw 10vw 5vw 10vw;
-  background-color: lightskyblue;
+  background-color: #002A32;
   border-radius: 20px 20px 20px 20px;
   font-size: 1.5em;
+  border: none;
+  color: whitesmoke;
 }

@@ -4,8 +4,10 @@
   left: 0;
   width: 50vw;
   height: 10vh;
-  background-color: lightskyblue;
+  background-color: #002A32;
   font-size: 1em;
+  border: none;
+  color: whitesmoke;
 }
 
 .collection-button {
@@ -14,8 +16,10 @@
   right: 0;
   width: 50vw;
   height: 10vh;
-  background-color: lightgrey;
+  background-color: #002A32;
   font-size: 1em;
+  border: none;
+  color: whitesmoke;
 }
 #home-card {
   height: 90vh;

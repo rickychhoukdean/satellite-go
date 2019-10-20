@@ -88,6 +88,7 @@ const useSatelliteInfo = () => {
     return getWikiSearch(satellite.satname, satellite.intDesignator).then(
       title => {
         if (title) {
+          console.log("==|==|> title:",title)
           Promise.all([getWikiSatDesc(title), getWikiSatImg(title)]).then(
             values => {
               // console.log(intDesignator)

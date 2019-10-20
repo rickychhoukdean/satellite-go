@@ -55,19 +55,23 @@ function SatelliteCard({sat, image, desc, addToFavourites, card_style }) {
                 </div>
                 }
             </div>
-            <img src={image} className='image' />
+            <img src={sat.imageUrl 
+                ? sat.imageUrl 
+                : 'https://waterfm.com/wp-content/uploads/satellite-in-space.jpg' }
+                className='image' 
+            />
             {card_style === "carousel" && 
-            <div>
-                <p className='text'>
+            <div className='text'>
+                <p>
                     latitude: {sat.satlat}
                 </p>
-                <p className='text'>
+                <p>
                     longitude: {sat.satlng}
                 </p>
-                <p className='text'>
+                <p>
                     launch date: {sat.launchDate}
                 </p>
-                <p className='text'>
+                <p>
                     {sat.description}
                 </p>
             </div>
@@ -75,15 +79,21 @@ function SatelliteCard({sat, image, desc, addToFavourites, card_style }) {
 
             {card_style === 'carousel' &&
             <div>
-            <button ref={target} style={{ borderRadius:100, backgroundColor: '#939393', width: 45, height: 45, position: 'absolute', bottom: 45, right: 20, borderWidth: 0 }} onClick={e => {
-                addToFavourites(sat, desc)
-                console.log('clicked')
-                setShow(!show)
-                
-            }}>+</button>
+            <button ref={target} style={{ borderRadius:100, backgroundColor: '#939393', width: 45, height: 45, position: 'absolute', bottom: 45, right: 20, borderWidth: 0 }} 
+                onClick={e => {
+                    addToFavourites(sat, desc)
+                    console.log('clicked')
+                    setShow(!show)
+                    e.target.disabled=true
+                    setTimeout(() => {
+                        setShow(false)
+                    }, 2000)
+                }}>
+                +
+                </button>
              <Overlay target={target.current} show={show} placement="left">
         {props => (
-          <Tooltip id="overlay-example" {...props}>
+          <Tooltip id="overlay-example" {...props} style={{ backgroundColor: 'blue', padding: 2, ...props.style }}>
             Added to collection.
           </Tooltip>
         )}
