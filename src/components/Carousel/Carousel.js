@@ -19,12 +19,13 @@ function ControlledCarousel({sats , title}) {
   const addToFavourites = (sat, desc) => {
     console.log("==|==|> adding",sat.satid,"to favourites!")
 
-    axios.post('https://cors-anywhere.herokuapp.com/https://nasa-spaceapp-lhl.herokuapp.com/user/1/satellites?name='+sat.satname+'&year_launched='+sat.launchDate+'&sat_id='+sat.satid+'&description='+desc, {
+    axios.post('https://cors-anywhere.herokuapp.com/https://nasa-spaceapp-lhl.herokuapp.com/user/1/satellites?name='+sat.satname+'&year_launched='+sat.launchDate+'&sat_id='+sat.satid+'&img_url='+sat.imageUrl+'&description='+desc, {
       params: {
         sat_id: sat.satid,
         name: sat.satname,
         description: desc,
-        year_launched: sat.launchDate
+        year_launched: sat.launchDate,
+        img_url: sat.imageUrl
       }
     })
     .then(res => {

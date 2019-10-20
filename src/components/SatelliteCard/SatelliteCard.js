@@ -57,7 +57,7 @@ function SatelliteCard({sat, image, desc, addToFavourites, card_style }) {
             </div>
             <img src={sat.imageUrl 
                 ? sat.imageUrl 
-                : 'https://waterfm.com/wp-content/uploads/satellite-in-space.jpg' }
+                : (sat.img_url ? sat.img_url : 'https://waterfm.com/wp-content/uploads/satellite-in-space.jpg') }
                 className='image' 
             />
             {card_style === "carousel" && 
